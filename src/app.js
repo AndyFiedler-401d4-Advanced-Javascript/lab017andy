@@ -24,15 +24,17 @@ const alterFile = (file) => {
   readFileProm(file)
   .then(data => {
     let text = data.toString().toUpperCase();
-    writeFileProm(file, Buffer.from(text));
-    console.log(text);
-      console.log(`${file} saved`);
-      eventHub.emit('save', file);
+    return writeFileProm(file, Buffer.from(text))
   })
-   .catch(error => {
-     eventHub.emit('error', error)
-   })
-  };
+  .then(() => {
+    console.log(text);
+    console.log(`${file} saved`);
+    eventHub.emit('save', file);
+  })
+  .catch(error => {
+    eventHub.emit('error', error)
+  })
+};
 
 
   // Don't save until we're probably connected
