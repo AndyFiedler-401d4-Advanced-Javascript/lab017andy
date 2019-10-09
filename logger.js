@@ -14,6 +14,6 @@ client.connect(PORT, 'localhost', () => {
 eventHub.on('save', file => {
   console.log(`Record ${file} was saved!`)});
 
-eventHub.on('error', file => {
-  console.error('Something went wrong.')}
-  );
+eventHub.on('error', err => {
+  console.error('Something went wrong.', err)
+});
