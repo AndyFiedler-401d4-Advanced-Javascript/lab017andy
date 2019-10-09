@@ -16,12 +16,18 @@ server.on('connection', (socket) => {
   console.log(`${id} connected! ${Object.keys(socketPool).length} total.`);
 
   for(let socketId in socketPool) {
-    socketPool[socketId].write(`${id} connected!\r\n`);
+    socketPool[socketId].write(
+      JSON.stringify({
+        eventType: 'connected',
+        id,
+      }) + '\r\n');
   }
   socket.on('data', dispatchEvent);
   socket.on('close', () => {
     delete socketPool[id];
-
+  });
+  socket.on('error', error => {
+    console.error('error!', error);
   });
 });
 

@@ -7,8 +7,16 @@ client.connect(PORT, 'localhost', () => {
   console.log(`Connected on ${PORT}`);
 });
 
+let eventsToLog = ['connected', 'save', 'error'];
 client.on('data', data => {
-  console.log('LOG', data.toString());
+  try {
+    let event = JSON.parse(data.toString());
+    if (eventsToLog.includes(event.eventType)) {
+      console.log('LOG', data.toString());
+    }
+  // eslint-disable-next-line no-empty
+  } catch (err) {
+  }
 });
 
 client.on('close', () => {

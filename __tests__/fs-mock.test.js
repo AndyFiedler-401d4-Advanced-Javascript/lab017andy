@@ -82,6 +82,6 @@ describe('mock fs', () => {
         expect(data.toString()).toBe('./another/good/file.txt Contents');
         done();
       });
-    })
+    });
   });
 });

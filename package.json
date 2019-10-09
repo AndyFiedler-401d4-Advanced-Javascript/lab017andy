@@ -4,6 +4,7 @@
   "description": "Events Lab",
   "main": "app.js",
   "scripts": {
+    "lint": "eslint .",
     "test": "jest --verbose --coverage"
   },
   "author": "",
@@ -12,6 +13,7 @@
     "uuid": "^3.3.3"
   },
   "devDependencies": {
+    "eslint": "^6.5.1",
     "jest": "^24.8.0"
   }
 }

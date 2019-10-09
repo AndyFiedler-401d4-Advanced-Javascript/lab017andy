@@ -15,6 +15,9 @@ function initializeLogger() {
   console.log('Network logger connected!');
 
   eventHub.on('save', log('save'));
+  eventHub.on('read', log('read'));
+  eventHub.on('toUpper', log('toUpper'));
+  eventHub.on('complete', log('complete'));
 
   function log(eventType) {
     return payload => {
