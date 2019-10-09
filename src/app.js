@@ -8,11 +8,10 @@ const fs = require('fs');
 const uuid = require('uuid');
 
 require('../logger');
-require('./network-logger');
-require('./cache-invalidator');
+require('../network-logger');
 
 
-const eventHub = require('./event');
+const eventHub = require('../hub');
 const {promisify} = require('util');
 
 const readFileProm = promisify(fs.readFile);
@@ -27,7 +26,6 @@ const alterFile = (file) => {
     return writeFileProm(file, Buffer.from(text))
   })
   .then(() => {
-    console.log(text);
     console.log(`${file} saved`);
     eventHub.emit('save', file);
   })
@@ -35,14 +33,6 @@ const alterFile = (file) => {
     eventHub.emit('error', error)
   })
 };
-
-
-  // Don't save until we're probably connected
-setInterval(() => {
-  saveToDb({ name: uuid() });
-}, 500);
-
-const { saveToDb } = require('./db');
 
 let file = process.argv.slice(2).shift();
 alterFile(file);
