@@ -14,8 +14,8 @@ client.on('data', data => {
     if (eventsToLog.includes(event.eventType)) {
       console.log('LOG', data.toString());
     }
+  // eslint-disable-next-line no-empty
   } catch (err) {
-
   }
 });
 

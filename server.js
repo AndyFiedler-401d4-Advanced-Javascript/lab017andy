@@ -26,9 +26,9 @@ server.on('connection', (socket) => {
   socket.on('close', () => {
     delete socketPool[id];
   });
-  socket.on('error', () => {
+  socket.on('error', error => {
     console.error('error!', error);
-  })
+  });
 });
 
 let dispatchEvent = (buffer) => {
